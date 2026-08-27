@@ -1,0 +1,229 @@
+/* 「今晚，好好睡了吗？」—— 夜晚 / 安静 / 温和 / 极简 / 陪伴感 */
+:root {
+  --bg: #0d1120;
+  --bg-elev: #161b30;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #e9e7f1;
+  --text-dim: #a39fb5;
+  --moon: #cdd3ff;
+  --accent: #8b9bff;
+  --accent-strong: #6f80f0;
+  --warm: #c9b8ff;
+  --danger-soft: #9aa;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: radial-gradient(1200px 800px at 70% -10%, #1b2140 0%, var(--bg) 55%);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 28px 22px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 60% 65%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(2px 2px at 80% 20%, rgba(200,205,255,.6), transparent 60%),
+    radial-gradient(1px 1px at 40% 85%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1.2px 1.2px at 90% 55%, rgba(255,255,255,.4), transparent 60%);
+}
+
+.main { position: relative; z-index: 1; }
+
+/* 卡片 */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  backdrop-filter: blur(6px);
+  animation: rise .5s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 字体 */
+.big { font-size: 30px; line-height: 1.25; font-weight: 600; letter-spacing: .5px; }
+.emoji { font-size: 44px; display: block; margin-bottom: 12px; }
+.dim { color: var(--text-dim); }
+.small { font-size: 13px; }
+.muted { color: var(--text-dim); font-size: 14px; line-height: 1.7; }
+.title { font-size: 17px; font-weight: 600; margin: 0 0 6px; color: var(--moon); }
+.mb { margin-bottom: 14px; }
+
+/* 时钟 */
+.clock {
+  font-size: 46px;
+  font-weight: 200;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  color: var(--moon);
+  text-align: center;
+}
+.clock-label {
+  text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 2px;
+}
+
+/* 按钮 */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease, opacity .12s ease;
+  margin-top: 14px;
+}
+.btn:hover { background: rgba(255,255,255,.08); }
+.btn:active { transform: scale(.98); }
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #0c0f1f;
+  border: none;
+  font-weight: 600;
+}
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; }
+.btn.secondary { background: rgba(255,255,255,.04); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* 输入 */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  background: rgba(0,0,0,.2);
+  color: var(--text);
+  font-size: 16px;
+  resize: none;
+}
+.input:focus { outline: none; border-color: var(--accent); }
+
+/* 设置行 */
+.setting-line { margin-bottom: 18px; }
+.setting-label { font-size: 14px; color: var(--text-dim); margin-bottom: 8px; }
+.setting-hint { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+.compute {
+  background: rgba(141,155,255,.08);
+  border: 1px dashed rgba(141,155,255,.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+.compute span b { color: var(--moon); }
+
+/* 历史列表 */
+.hist-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--card-border);
+  font-size: 14px;
+}
+.hist-row:last-child { border-bottom: none; }
+
+/* 时间输入 */
+.time-um { display: flex; gap: 10px; align-items: center; }
+.time-um select, .time-um input[type='time'] {
+  background: rgba(0,0,0,.25);
+  color: var(--moon);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 15px;
+}
+
+/* 过渡 */
+.fade { animation: rise .45s ease both; }
+
+/* Tool 面板（模拟"已打开文档"）*/
+.toolpanel {
+  border: 1px solid rgba(141,155,255,.35);
+  border-radius: 14px;
+  background: rgba(20,26,52,.85);
+  padding: 18px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+}
+.toolpanel .bar {
+  display: flex; gap: 6px; margin-bottom: 14px; align-items: center;
+  font-size: 12px; color: var(--text-dim);
+}
+.toolpanel .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.tool-inline input {
+  width: 100%; padding: 10px 12px; margin: 8px 0 6px;
+  border-radius: 10px; border: 1px solid var(--card-border);
+  background: rgba(0,0,0,.25); color: var(--text); font-size: 14px;
+}
+
+.check-list { list-style: none; padding: 0; margin: 8px 0; }
+.check-list li {
+  padding: 8px 10px; border-radius: 10px; margin-bottom: 8px;
+  background: rgba(0,0,0,.18); font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+}
+.check-list li.done { opacity: .55; }
+.check-list li .tick {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1px solid var(--card-border); display: inline-flex;
+  align-items: center; justify-content: center; font-size: 12px; flex: none;
+}
+.check-list li.done .tick { background: var(--accent); color: #0c0f1f; border: none; }
+
+/* 文本输入框区域 */
+textarea.input { min-height: 64px; }
+
+/* 加载 */
+.loading {
+  display: flex; gap: 8px; justify-content: center; align-items: center;
+  padding: 30px 0; font-size: 14px; color: var(--text-dim);
+}
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--card-border); border-top-color: var(--accent);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 页脚演示提示 */
+.foot {
+  margin-top: 22px; text-align: center; font-size: 11px; color: var(--text-dim);
+  opacity: .6;
+}
